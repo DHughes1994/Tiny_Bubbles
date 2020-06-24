@@ -5,7 +5,7 @@ public class BreweryCityListController {
         //Cleaning string for use in the URL
         City = City.replace(' ', '_');        
         City = City.toLowerCase();
-        
+        //Callout to Open Brewery DB
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndPoint('https://api.openbrewerydb.org/breweries?by_city='+City);
