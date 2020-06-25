@@ -1,0 +1,4 @@
+<aura:component>
+    <aura:attribute name="Brewery" type="object"/>
+    <aura:attribute name="SavedList" type="list"/>
+</aura:component>	
