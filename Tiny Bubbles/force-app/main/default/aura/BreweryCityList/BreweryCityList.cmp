@@ -1,11 +1,18 @@
-<aura:component controller="BreweryCityListController">
+<aura:component controller="BreweryCityListController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <!--Attribute for Search Bar-->
+    <aura:attribute name="City" type="String"/>
+
+    <!--Making the search bar-->
+    <div>
+        <lightning:buttonIcon iconName="utility:search" onclick="{!c.search}" alternativeText="Search" class="slds-input__icon"/>
+        <ui:inputText value="{!v.City}" class="slds-lookup__search-input slds-input" placeholder="City"/>
+    </div>
+
     <!--Creating Attributes for the DataTable-->
     <aura:attribute name="Brewery" type="Object"/>
     <aura:attribute name="BreweryInfo" type="List"/>
     <aura:attribute name="SelectedRowCount" type="Integer" default="0"/>
     <aura:attribute name="MaxRowCount" type="Integer" default="1"/>
-
-    <aura:handler name="init" value='{!this}' action="{!c.doInit}"/>
 
     <!--Data Table Setup-->
     <div style="height: auto">
@@ -13,6 +20,18 @@
         columns="{!v.BreweryInfo}"
         data="{!v.Brewery}"
         keyField="id"
-        maxRowSelection="{!v.MaxRowCount}"/>
+        maxRowSelection="{!v.MaxRowCount}"
+        onrowselection="{!c.holdSelected}"/>
     </div>
+
+    <!--Attribute to hold the value of the selected item and user input-->
+    <aura:attribute name="SelectedBrewery" type="object"/>
+    <aura:attribute name="Rating" type="Integer"/>
+    <aura:attribute name="Notes" type="String"/>
+
+    <!--User optionally gives rating and notes and clicks button to save record-->
+    <ui:inputNumber value="{!v.Rating}" placeholder="1-10"/>
+    <ui:inputTextArea value="{!v.Notes}" placeholder="Notes"/>
+    <lightning:button variant="Save" label="Save" title="Save Action" onclick="{!c.save}"/>
+
 </aura:component>	

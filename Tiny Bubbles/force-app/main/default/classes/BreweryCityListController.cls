@@ -35,4 +35,29 @@ public class BreweryCityListController {
             return nogo;
         }
     }
+
+    @AuraEnabled
+    public static void saveNewBrewery(String breweryName, String Type, String Street, String City,
+                                        String State, String ZipCode, String Phone, String Website,
+                                        Integer Rating, String Notes){
+        
+        Decimal fixedPhone;
+
+        if (Phone == '') {
+            Phone=null;
+        }else {
+        fixedPhone = decimal.valueof(Phone);
+        }
+                
+        if (Rating == 0) {
+            Rating = null;
+        }
+
+        Brewery__c newBrewery = new Brewery__c(Name = breweryName, Type__c = Type, Street_Address__c = Street,
+                                                City__c = City, State__c = State, Zip_Code__c = ZipCode, 
+                                                Phone__c = fixedPhone, Website__c = Website, Rating__c = Rating,
+                                                Notes__c = Notes);
+        insert newBrewery;
+        
+    }
 }
