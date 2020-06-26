@@ -21,11 +21,17 @@
         data="{!v.Brewery}"
         keyField="id"
         maxRowSelection="{!v.MaxRowCount}"
-        onrowselection="{!c.save}"/>
+        onrowselection="{!c.holdSelected}"/>
     </div>
 
-    <!--Use Flow to save the Record-->
-    <div>
-        <lightning:flow aura:id="flowData"/>
-    </div>
+    <!--Attribute to hold the value of the selected item and user input-->
+    <aura:attribute name="SelectedBrewery" type="object"/>
+    <aura:attribute name="Rating" type="Integer"/>
+    <aura:attribute name="Notes" type="String"/>
+
+    <!--User optionally gives rating and notes and clicks button to save record-->
+    <ui:inputNumber value="{!v.Rating}" placeholder="1-10"/>
+    <ui:inputTextArea value="{!v.Notes}" placeholder="Notes"/>
+    <lightning:button variant="Save" label="Save" title="Save Action" onclick="{!c.save}"/>
+
 </aura:component>	

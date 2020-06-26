@@ -27,33 +27,63 @@
         $A.enqueueAction(action);
     },
 
-    save : function(component, event, helper) {
-
+    holdSelected : function(component, event, helper) {
         var selectedRow = event.getParam("selectedRows");
         selectedRow = selectedRow[0];
-        console.log(selectedRow.Name);
-        console.log(selectedRow.Phone);
-        console.log(selectedRow.Street);
-        console.log(selectedRow.ZipCode);
-        console.log(selectedRow);
-        
-        var inputBrewery = [{
-            name:"FlowBrewery",
-            type:"sObject",
-            value:{
-                "Name":selectedRow.Name,
-                "Type__c":selectedRow.Type,
-                "Street_Address__c":selectedRow.Street,
-                "City__c":selectedRow.City,
-                "State__c":selectedRow.State,
-                "Zip_Code__c":selectedRow.ZipCode,
-                "Phone__c":selectedRow.Phone,
-                "Website__c":selectedRow.Website
+        component.set("v.SelectedBrewery", selectedRow);
+    },
+
+    save : function(component, event, helper) {
+
+        var breweryInfo = component.get("v.SelectedBrewery");
+        var rating = component.get("v.Rating");
+        var notes = component.get("v.Notes");
+
+        console.log(typeof breweryInfo.Phone);
+        //console.log(typeof rating);
+
+        if (typeof breweryInfo.Street === 'undefined'||typeof breweryInfo.Street === 'object') {
+            breweryInfo.Street = '';
+        }
+        if (typeof breweryInfo.ZipCode === 'undefined'||typeof breweryInfo.ZipCode === 'object') {
+            breweryInfo.ZipCode = '';
+        }
+        if (typeof breweryInfo.Phone === 'undefined'||typeof breweryInfo.Phone === 'object') {
+            breweryInfo.Phone = '';
+        }
+        console.log(typeof breweryInfo.Phone);
+        if (typeof breweryInfo.Website === 'undefined'||typeof breweryInfo.Website === 'object') {
+            breweryInfo.Website = '';
+        }
+        if (typeof rating == 'undefined'||typeof rating == 'object') {
+            rating = 0;
+        }
+        //console.log(typeof rating);
+        if (typeof notes == 'undefined'||typeof notes == 'object') {
+            notes = '';
+        }
+
+        var action = component.get("c.saveNewBrewery");
+        action.setParams({"breweryName":breweryInfo.Name,
+                            "Type":breweryInfo.Type,
+                            "Street":breweryInfo.Street,
+                            "City":breweryInfo.City,
+                            "State":breweryInfo.State,
+                            "ZipCode":breweryInfo.ZipCode,
+                            "Phone":breweryInfo.Phone,
+                            "Website":breweryInfo.Website,
+                            "Rating":rating,
+                            "Notes":notes
+                        });
+        action.setCallback(this, function(response) {
+            var state = response.getState();
+            if (state === "SUCCESS") {
+                console.log("Record Saved");
+            } else {
+                console.log("NoGo");
             }
-        }];
-        console.log(inputBrewery);
-        var flow = component.find("flowData");
-        flow.startFlow("Save_Brewery",inputBrewery);
+        });
+        $A.enqueueAction(action);
 
         
     }

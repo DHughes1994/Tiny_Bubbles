@@ -1,8 +1,8 @@
-<aura:component>
+<aura:component controller="UserSavedListController"> 
     <aura:attribute name="Brewery" type="object"/>
     <aura:attribute name="SavedList" type="list"/>
 
-    <aura:handler name="init" value="!this" action="{!c.doinit}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
 
     <div style="height: auto">
         <lightning:datatable
