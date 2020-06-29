@@ -18,5 +18,15 @@
         });
         $A.enqueueAction(action);
         
+    },
+
+    updateDetail : function(component, event, helper) {
+        var selectedRow = event.getParam("selectedRows");
+        selectedRow = selectedRow[0];
+        console.log(selectedRow);
+        var id = selectedRow.Id;
+        var updateDetail = $A.get("e.c:UpdateDetailComponent");
+        updateDetail.setParams({"BreweryId": id});
+        updateDetail.fire();
     }
 })

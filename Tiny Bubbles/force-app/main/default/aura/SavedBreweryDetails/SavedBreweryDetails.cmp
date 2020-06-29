@@ -1,0 +1,18 @@
+<aura:component>
+    <aura:attribute name="BreweryId" type="String"/>
+    <aura:attribute name="DisplayPage" type="Boolean" default="false"/>
+    <aura:attribute name="BreweryName" type="String"/>
+    <aura:handler event="c:UpdateDetailComponent" action="{!c.getUpdated}"/>
+    <aura:if isTrue="{!v.DisplayPage}">
+        <lightning:recordEditForm recordId="{!v.BreweryId}" objectApiName="Brewery__c">
+            <lightning:messages/>
+            <lightning:outputField fieldName="Name"/>
+            <lightning:outputField fieldName="Type__c"/>
+            <lightning:outputField fieldName="Phone__c"/>
+            <lightning:outputField fieldName="Website__c"/>
+            <lightning:inputField fieldName="Rating__c"/>
+            <lightning:inputField fieldName="Notes__c"/>
+            <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" />
+        </lightning:recordEditForm>
+    </aura:if>
+</aura:component>	

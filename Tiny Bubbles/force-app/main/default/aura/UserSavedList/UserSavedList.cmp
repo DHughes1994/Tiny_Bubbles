@@ -1,6 +1,9 @@
 <aura:component controller="UserSavedListController"> 
     <aura:attribute name="Brewery" type="object"/>
     <aura:attribute name="SavedList" type="list"/>
+    <aura:attribute name="SelectedRowCount" type="Integer" default="0"/>
+    <aura:attribute name="MaxRowCount" type="Integer" default="1"/>
+    <aura:registerEvent name="updateDetail" type="c:UpdateDetailComponent"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
 
@@ -8,6 +11,8 @@
         <lightning:datatable
         columns="{!v.SavedList}"
         data="{!v.Brewery}"
-        keyField="id"/>
+        keyField="id"
+        maxRowSelection="{!v.MaxRowCount}"
+        onrowselection="{!c.updateDetail}"/>
     </div>
 </aura:component>	
