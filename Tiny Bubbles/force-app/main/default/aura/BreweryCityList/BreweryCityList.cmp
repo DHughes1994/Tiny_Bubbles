@@ -15,23 +15,31 @@
     <aura:attribute name="MaxRowCount" type="Integer" default="1"/>
 
     <!--Data Table Setup-->
-    <div style="height: auto">
-        <lightning:datatable
-        columns="{!v.BreweryInfo}"
-        data="{!v.Brewery}"
-        keyField="id"
-        maxRowSelection="{!v.MaxRowCount}"
-        onrowselection="{!c.holdSelected}"/>
-    </div>
+    <lightning:card>
+        <h1>Search by City</h1>
+        <div style="height: auto">
+            <lightning:datatable
+            columns="{!v.BreweryInfo}"
+            data="{!v.Brewery}"
+            keyField="id"
+            maxRowSelection="{!v.MaxRowCount}"
+            onrowselection="{!c.holdSelected}"/>
+        </div>
+    </lightning:card>
 
     <!--Attribute to hold the value of the selected item and user input-->
     <aura:attribute name="SelectedBrewery" type="object"/>
     <aura:attribute name="Rating" type="Integer"/>
     <aura:attribute name="Notes" type="String"/>
+    <aura:attribute name="DisplayInput" type="boolean" default="false"/>
 
     <!--User optionally gives rating and notes and clicks button to save record-->
-    <ui:inputNumber value="{!v.Rating}" placeholder="1-10"/>
-    <ui:inputTextArea value="{!v.Notes}" placeholder="Notes"/>
-    <lightning:button variant="Save" label="Save" title="Save Action" onclick="{!c.save}"/>
+    <aura:if isTrue="{!v.DisplayInput}">
+        <lightning:card>
+            <ui:inputNumber value="{!v.Rating}" placeholder="1-10"/>
+            <ui:inputTextArea value="{!v.Notes}" placeholder="Notes"/>
+            <lightning:button variant="Save" label="Save" title="Save Action" onclick="{!c.save}"/>
+        </lightning:card>
+    </aura:if>
 
-</aura:component>	
+</aura:component>

@@ -6,13 +6,15 @@
     <aura:registerEvent name="updateDetail" type="c:UpdateDetailComponent"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
-
-    <div style="height: auto">
-        <lightning:datatable
-        columns="{!v.SavedList}"
-        data="{!v.Brewery}"
-        keyField="id"
-        maxRowSelection="{!v.MaxRowCount}"
-        onrowselection="{!c.updateDetail}"/>
-    </div>
-</aura:component>	
+    <lightning:card >
+        <h1>Your list</h1>
+        <div style="height: auto">
+            <lightning:datatable
+            columns="{!v.SavedList}"
+            data="{!v.Brewery}"
+            keyField="id"
+            maxRowSelection="{!v.MaxRowCount}"
+            onrowselection="{!c.updateDetail}"/>
+        </div>
+    </lightning:card>
+</aura:component>

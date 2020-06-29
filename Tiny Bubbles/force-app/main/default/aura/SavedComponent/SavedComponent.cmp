@@ -1,4 +1,8 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
-    <c:UserSavedList/>
-    <c:SavedBreweryDetails/>
-</aura:component>	
+    <lightning:card class="sldsslds-col slds-size_1-of-2">
+        <c:UserSavedList/>
+    </lightning:card>
+    <lightning:card class="sldsslds-col slds-size_1-of-2">
+        <c:SavedBreweryDetails/>
+    </lightning:card>
+</aura:component>
