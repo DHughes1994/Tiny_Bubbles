@@ -1,0 +1,4 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <c:UserSavedList/>
+    <c:SavedBreweryDetails/>
+</aura:component>	

@@ -43,6 +43,18 @@ public class BreweryCityListController {
         
         Decimal fixedPhone;
 
+        ID userId = System.UserInfo.getUserId();
+
+        system.debug(userId);
+
+        User userContactId = [Select Name, ContactId FROM USER WHERE ID = :userId];
+
+        system.debug(userContactId);
+
+        String contactId = userContactid.ContactId;
+
+        system.debug(contactId);
+
         if (Phone == '') {
             Phone=null;
         }else {
@@ -56,7 +68,7 @@ public class BreweryCityListController {
         Brewery__c newBrewery = new Brewery__c(Name = breweryName, Type__c = Type, Street_Address__c = Street,
                                                 City__c = City, State__c = State, Zip_Code__c = ZipCode, 
                                                 Phone__c = fixedPhone, Website__c = Website, Rating__c = Rating,
-                                                Notes__c = Notes);
+                                                Notes__c = Notes, Contact__c = contactId);
         insert newBrewery;
         
     }
