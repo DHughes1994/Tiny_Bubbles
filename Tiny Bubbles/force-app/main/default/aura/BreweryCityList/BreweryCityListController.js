@@ -31,6 +31,7 @@
         var selectedRow = event.getParam("selectedRows");
         selectedRow = selectedRow[0];
         component.set("v.SelectedBrewery", selectedRow);
+        component.set("v.DisplayInput", true);
     },
 
     save : function(component, event, helper) {
@@ -79,6 +80,7 @@
             var state = response.getState();
             if (state === "SUCCESS") {
                 console.log("Record Saved");
+                component.set("v.DisplayInput", false);
             } else {
                 console.log("NoGo");
             }
